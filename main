@@ -1,0 +1,55 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+    
+    public Form() {
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/user_db", "yourUsername", "yourPassword");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        frame = new JFrame("Sign In and Login Form");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        
+        signInUsernameField = new JTextField(20);
+        signInPasswordField = new JPasswordField(20);
+        JButton signInButton = new JButton("Sign In");
+        signInButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                signIn();
+            }
+        });
+
+        loginUsernameField = new JTextField(20);
+        loginPasswordField = new JPasswordField(20);
+        JButton loginButton = new JButton("Login");
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                login();
+            }
+        });
+
+        JPanel signInPanel = new JPanel(new GridLayout(3, 2));
+        signInPanel.add(new JLabel("Username:"));
+        signInPanel.add(signInUsernameField);
+        signInPanel.add(new JLabel("Password:"));
+        signInPanel.add(signInPasswordField);
+        signInPanel.add(signInButton);
+
+        JPanel loginPanel = new JPanel(new GridLayout(3, 2));
+        loginPanel.add(new JLabel("Username:"));
+        loginPanel.add(loginUsernameField);
+        loginPanel.add(new JLabel("Password:"));
+        loginPanel.add(loginPasswordField);
+        loginPanel.add(loginButton);
+
+        frame.setLayout(new FlowLayout());
+        frame.add(signInPanel);
+        frame.add(loginPanel);
+        frame.setVisible(true);
+    }
+
+    
